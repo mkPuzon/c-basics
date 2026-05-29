@@ -98,4 +98,5 @@ void string_delete(String *s) {
 
   s->data = NULL;
   s->length = 0;
+  s->capacity= 0;
 }
