@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "../tests/test_string.c"
 
 typedef struct {
   char *data;
@@ -29,8 +28,8 @@ void string_print(String *s);
 void string_print(String *s) {
   char c;
   printf("Length=%zu | Capacity=%zu\n", s->length, s->capacity);
-  for (int i = 0; i < s->capacity; i++){
-    if (i > s->length) {
+  for (int i = 0; i < (int)s->capacity; i++){
+    if (i > (int)s->length) {
       printf("[_]");
     } else {
       c = s->data[i];
@@ -99,30 +98,4 @@ void string_delete(String *s) {
 
   s->data = NULL;
   s->length = 0;
-}
-
-
-int main() {
-
-  String t = string_create("hello");
-  String s = string_create("hello");
-
-  assert_true(
-    string_is_equal(&t, &s),
-    "Strings with same chars should be equal."
-  );
-  
-  t.capacity += 8;
-
-  assert_true(
-    string_is_equal(&t, &s),
-    "Strings with same chars but different capacities should be equal."
-  );
-
-  assert_false(
-    t.capacity == s.capacity,
-    "Strings should not have same capacities."
-  );
-  
-  return 0;
 }
