@@ -94,7 +94,7 @@ int main() {
   );
 
 
-  printf("\n==== TESTING CAPACITY AND _is_equal() ====\n");
+  printf("\n==== TESTING _is_equal() & get_capacity() & get_len() ====\n");
 
   String t = string_create("hello");
   String s = string_create("hello");
@@ -115,6 +115,21 @@ int main() {
     t.capacity == s.capacity,
     "Strings should not have same capacities."
   );
+
+  assert_true(
+    string_get_capacity(&s) == (size_t)8,
+    "Capacity of string w/ len < 8 should be 8."
+  );
   
+  assert_true(
+    string_get_capacity(&t) == (size_t)16,
+    "Capacity of string t should be 16."
+  );
+
+  assert_true(
+    string_get_len(&s) == string_get_len(&t),
+    "Strings with same letters but different capacities should have same length value."
+  );
+
   return 0;
 }
